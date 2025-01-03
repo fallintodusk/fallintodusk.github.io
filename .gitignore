@@ -1,0 +1,28 @@
+# Jekyll build artifacts
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+
+# Bundler dependencies
+.bundle/
+#vendor/
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.swp
+*~
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Node.js dependencies (if applicable)
+node_modules/
+
+# Backup files
+*.bak
+*.old
