@@ -4,6 +4,10 @@ main:
     url: /about/
   - title: "Features"
     url: /features/
+  - title: "Roadmap"
+    url: /roadmap/
+  - title: "Community"
+    url: /community/
   # - title: "Sample Posts"
   #   url: /year-archive/
   # - title: "Sample Collections"
