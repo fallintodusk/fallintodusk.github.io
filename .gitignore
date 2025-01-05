@@ -6,7 +6,7 @@ _site/
 
 # Bundler dependencies
 .bundle/
-vendor/
+#vendor/
 
 # Log files
 *.log
