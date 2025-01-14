@@ -20,3 +20,20 @@ Our mission is to teach practical skills, give joy and unite players.
 - **Connect**: Build communities and foster real-world collaboration.
 
 ---
+
+## Faith
+
+To ensure the authenticity of **ALIS**, we provide a cryptographic signature for verification.
+
+**Fingerprint**: 3B98 85F0 C2D8 D927 C27F  AB58 F61A 5300 34CF B5E7
+
+You can download the public key with this fingerprint from the <a href="https://keys.openpgp.org/">central keys repository </a>
+or <a href="https://fallintodusk.github.io/assets/security/public-key.asc">directly from our site</a>.
+
+**Important**:
+- Always **check the fingerprint** before importing the public key.
+- **Refuse** any files with a signature that does not verify against this public key.
+
+You can verify the authenticity of signatures using <a href="https://www.gnupg.org/">GNU Privacy Guard (GPG)</a>
+
+---
