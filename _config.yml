@@ -310,6 +310,7 @@ compress_html:
   ignore:
     envs: development
 
+date_format: "%Y-%m-%d-%k-%M-%S"
 
 # Defaults
 defaults:
@@ -325,4 +326,4 @@ defaults:
       share: true
       related: true
       show_date: true
-      date_format: "%Y-%m-%d-%k-%M-%S"
+      
