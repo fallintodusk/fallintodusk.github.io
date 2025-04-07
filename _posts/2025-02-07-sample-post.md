@@ -1,7 +1,6 @@
 ---
 layout: single
 title: "Spreadsheet Title"
-description: "Spreadsheet Description"
 image: "https://example.com/image-url.jpg"
 date: 2025-01-05 16:41:25 +0000
 categories: demo news
