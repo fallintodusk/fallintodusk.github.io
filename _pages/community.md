@@ -11,7 +11,7 @@ Connect, share ideas, and follow progress.
 
 ### Quick links
 - **Discord:** chat with the team and other players  
-  [Join Discord](https://discord.com/invite/GRawJHWd){: .btn .btn--primary }
+  [Join Discord](https://discord.gg/UPhcFh7JaB){: .btn .btn--primary }
 
 ## Contribute
 - Open ideas or issues on GitHub.  
