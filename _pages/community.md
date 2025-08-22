@@ -6,10 +6,16 @@ layout: single
 
 ---
 
-# Be in touch
+## Join us
+Connect, share ideas, and follow progress.
 
-Connect with us and join the **Alis** community to share your ideas and stay updated on the latest developments.
+### Quick links
+- **Discord:** chat with the team and other players  
+  [Join Discord](https://discord.com/invite/GRawJHWd){: .btn .btn--primary }
 
-[Discord](https://discord.gg/6X9Ybfyn){: .btn .btn--primary }
+## Contribute
+- Open ideas or issues on GitHub.  
+  [Go to GitHub](https://github.com/fallintodusk){: target="_blank" rel="noopener" }
+- PRs are welcome.
 
 ---
