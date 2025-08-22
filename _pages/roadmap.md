@@ -7,13 +7,18 @@ layout: single
 ---
 # Development Program
 
-## Current Stage
-- Mini-Demo: Basic survival mechanics, real world location.
+## Now
+- **Mini-Demo:** Basic survival mechanics in a real-world location.
 
-## Upcoming Features
-- Multiplayer: Collaborative survival and trading systems.
-- Advanced Crafting: Detailed item creation and upgrades.
+## Next
+- **Generated Expeditions:** Small procedural zones to gather resources, test mechanics, and unlock progress.
+- **Main-World Shelter:** Claim, upgrade, and stash gear in the persistent world.
+
+## Later
+- **Multiplayer:** Co-op play, simple trading, and safe interactions.
+- **Advanced Crafting:** Deeper recipes, upgrades, and item quality.
 
 ## Long-Term Vision
-- Open-world exploration.
-- Persistent player-led communities.
+- **Open-world exploration.**
+- **Persistent player-led communities.**
+- **Progressive decentralization:** DAO governance and community servers.
