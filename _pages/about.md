@@ -31,7 +31,7 @@ To ensure the authenticity of **ALIS**, we provide a cryptographic signature for
 
 Download the public key:
 - [keys.openpgp.org](https://keys.openpgp.org)  
-- [Direct from fall.is](/assets/keys/alis_pubkey.asc){: type="application/pgp-keys" }
+- [Direct from fall.is](/assets/security/public-key.asc){: type="application/pgp-keys" }
 
 **Important**:
 - Always **check the fingerprint** before importing the public key.
