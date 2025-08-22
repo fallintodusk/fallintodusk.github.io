@@ -1,6 +1,6 @@
 ---
-title: "Features"
-permalink: /features/
+title: "Core"
+permalink: /core/
 layout: single
 ---
 
