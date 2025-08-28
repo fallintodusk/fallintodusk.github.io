@@ -21,7 +21,7 @@ Explore the key systems and mechanics that define the immersive world of **Alis*
 ---
 
 ### 2. Real Locations
-- Navigate through real-world-inspired locations.
+- Navigate through real-world locations.
 
 ---
 
