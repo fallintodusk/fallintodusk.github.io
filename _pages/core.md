@@ -21,7 +21,7 @@ Explore the key systems and mechanics that define the immersive world of **Alis*
 ---
 
 ### 2. Real Locations
-- Navigate through real-world-inspired locations.
+- Navigate through real-world locations.
 
 ---
 
@@ -30,6 +30,7 @@ Explore the key systems and mechanics that define the immersive world of **Alis*
   - **Calories and Hunger**: 
     - Maintain calorie intake to sustain energy levels.
     - Lack of food leads to gradual debuffs and health reduction.
+    - Food restores real-world calories.
   - **Thirst**: 
     - Hydration is crucial; dehydration reduces life energy.
   - **Sleep**: 
