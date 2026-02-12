@@ -1,65 +1,72 @@
-# Alis Open Development License (AODL) v1.1
+# Alis Open Development Policy (AODL) v2.0
 
-This project is licensed under the Alis Open Development License (AODL), which builds upon widely recognized open-source licenses, customized to meet the specific goals of the Alis project.
+This repository is multi-licensed by component. AODL is the project's licensing **policy**, not a single combined license. Each component uses a real, established license — no modifications, no contradictions.
 
-## Goals and Terms:
+For the project's values and social contract, see [ALIS_PACT.md](ALIS_PACT.md).
 
-1. **Monetization Rights**:
-   - The right to sell or monetize the code, derivatives, or any associated assets (e.g., NFTs, backends, or game content) is reserved **exclusively for the project owners**.
-   - Contributions are welcome but may not be used for independent commercial purposes.
+---
 
-2. **Patent Protection**:
-   - Users and contributors are protected under the patent clauses of the base licenses (AGPL-3.0 and MPL-2.0), ensuring a royalty-free license for patents applicable to the code or project.
-   - Contributors further agree not to assert patent claims against other users or contributors.
+## 1. Code (backend, game core, tools, smart contracts)
 
-3. **Fostering Collaboration**:
-   - Users are encouraged to develop and expand the project.
-   - Modifications or extensions must be shared back with the community under the same license.
+Licensed under **GNU Affero General Public License v3.0 only** (AGPL-3.0-only).
 
-4. **Attribution for Code Use**:
-   - Users may use portions of the code or assets in other projects, provided:
-     - Proper attribution is given to the original Alis project.
-     - The modifications or extensions comply with this license.
+- You can use, modify, and distribute the code — including commercially
+- If you modify and distribute, or run it for users over a network, you must provide the source under AGPL-3.0
+- If you host a service using modified code, you must offer the source to service users (network copyleft)
+- Full text: https://www.gnu.org/licenses/agpl-3.0.en.html
 
-5. **Decentralization and Hosted Services**:
-   - Any use of the project in decentralized systems or hosted services (e.g., blockchain-based applications or distributed storage) must:
-     - Comply with the attribution and collaboration clauses of this license.
-     - Ensure that all modifications or enhancements to the project are shared back with the community.
-   - Users deploying decentralized versions or hosted instances of the project may not monetize such deployments without explicit permission from the project owners.
+## 2. Assets (art, audio, lore, world-building, game content)
 
-6. **NFTs and Digital Assets**:
-   - The creation, distribution, or monetization of NFTs or similar digital assets derived from the project's code, assets, or lore is reserved exclusively for the project owners.
-   - Contributions involving NFTs or blockchain-based functionality must comply with this license and may not be monetized independently.
+Licensed under **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International** (CC BY-NC-SA 4.0).
 
-7. **Scalability and Evolving Technologies**:
-   - This license is designed to adapt to emerging technologies and practices while maintaining the core goals of the Alis project.
-   - Any adaptations, integrations, or use cases involving new technologies (e.g., AI, machine learning, advanced decentralization platforms) must remain consistent with the terms of this license.
+- You can share and adapt for non-commercial purposes with attribution
+- Commercial use of assets requires written permission from the Alis maintainers
+- Derivatives must use the same license
+- Full text: https://creativecommons.org/licenses/by-nc-sa/4.0/
 
-8. **Trademark and Branding**:
-   - The Alis name, logo, and associated branding are protected and may not be used in derivative projects without explicit permission from the project owners.
-   - Derivative works must clearly distinguish themselves from the Alis project while complying with attribution requirements.
+## 3. Documentation and website
 
-9. **Blockchain Utilities and Smart Contracts**:
-   - Any smart contracts, blockchain utilities, or decentralized applications derived from this project must:
-     - Comply with the attribution and collaboration clauses of this license.
-     - Include proper attribution to the original Alis project within the contract metadata or documentation.
-   - Deployment of derived smart contracts for public or commercial use is reserved exclusively for the project owners, unless explicitly authorized.
-   - Any modifications or enhancements to the provided smart contracts must be shared back with the community under the same license.
+Licensed under **Mozilla Public License 2.0** (MPL-2.0).
 
+- File-level copyleft: modifications to MPL files must be shared
+- Can be combined with other-licensed code in a larger work
+- Full text: https://mozilla.org/MPL/2.0/
 
-## Licensing for Components:
-This project uses **base licenses** with the following custom modifications:
-- **Code (e.g., Backend, Game Core)**: Built on **GNU Affero General Public License v3.0 (AGPL-3.0)**, with monetization rights reserved to the owner.
-- **Assets (e.g., Visuals, Sound, Lore)**: Based on **Creative Commons Attribution-NonCommercial-ShareAlike v4.0 (CC BY-NC-SA)**, allowing non-commercial use with attribution.
-- **Site and Documentation**: Built on **Mozilla Public License v2.0 (MPL-2.0)**, ensuring modifications to these components are shared back.
+## 4. Trademarks
 
-## Important Notes:
-- By contributing to this project, you agree to the terms above.
-- The project owners reserve the right to update this license to clarify or expand terms while maintaining the core goals.
-- For any inquiries or commercial licensing requests, contact the project maintainers.
+"Alis", the Alis logo, and related branding are governed by a separate trademark policy.
 
-## Full Base Licenses:
-For detailed terms of the base licenses, see:
-- AGPL-3.0: https://www.gnu.org/licenses/agpl-3.0.en.html
-- CC BY-NC-SA: https://creativecommons.org/licenses/by-nc-sa/4.0/
-- MPL-2.0: https://mozilla.org/MPL/2.0/
+See [TRADEMARKS.md](TRADEMARKS.md).
+
+## 5. Contributions
+
+All contributions use the Developer Certificate of Origin (DCO) process.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+---
+
+## Why this structure?
+
+| What you want to do | Allowed? | License |
+|---|---|---|
+| Read and learn from the code | Yes | AGPL-3.0 |
+| Fork and modify the code | Yes, must share changes | AGPL-3.0 |
+| Run your own community server | Yes, must share server code | AGPL-3.0 |
+| Sell a product using the code | Yes, must provide source for the AGPL-covered program and modifications | AGPL-3.0 |
+| Use our art/music/lore commercially | No, unless we agree | CC BY-NC-SA |
+| Make fan art or non-commercial derivatives | Yes, with attribution | CC BY-NC-SA |
+| Call your fork "Alis" | No | Trademark |
+| Contribute code back | Yes, via DCO sign-off | DCO |
+
+---
+
+## Commercial licensing
+
+If you need a commercial license for Alis assets, branding, or a custom code license, contact the project maintainers.
+
+## Policy changes
+
+- Policy updates are versioned (vX.Y) with at least 30 days public notice
+- License changes do not apply retroactively to existing contributions
+- The underlying licenses (AGPL, CC, MPL) cannot be modified — they are used as-is
