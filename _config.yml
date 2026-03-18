@@ -21,7 +21,7 @@ title                    : "ALIS"
 title_separator          : "-"
 subtitle                 : "World Reborn"
 name                     : "ALIS"
-description              : "Open-source post-apocalyptic survival game. Real places, real-world logic, open code, and a pact for honest design. Learn. Survive. Connect."
+description              : "Open-source post-apocalyptic survival game. Real places, real-world logic, open code. Learn. Survive. Connect."
 url                      : #"http://localhost:4000"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "fallintodusk/fallintodusk.github.io" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -115,7 +115,7 @@ analytics:
 author:
   name             : "ALIS"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "Open-source post-apocalyptic survival game. Real places, honest design."
+  bio              : "Open-source post-apocalyptic survival. Real places, real-world logic, open code."
   location         :
   email            :
   links:

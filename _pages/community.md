@@ -13,20 +13,12 @@ layout: single
 
 ## Contribute
 
-ALIS welcomes public review, issues, and contributions. Contributions use DCO.
+ALIS welcomes issues, reviews, and contributions. All contributions use DCO (Developer Certificate of Origin).
 
-Start here:
-
-- [Contributing](/CONTRIBUTING.md)
+- [Contributing guide](/CONTRIBUTING.md)
 - [The Alis Pact](/ALIS_PACT.md)
 - [Trust](/trust/)
 
-## What Community Means Here
-
-- Public review of code and docs
-- Contribution to systems and workflows
-- Long-term resilience through openness
-
 ## Hosting and Governance
 
-Community hosting is part of the long-term direction. Governance is intended to become more open over time.
+Community-hosted dedicated servers and broader governance are part of the long-term direction. Current status: [Status](/status/).
