@@ -4,18 +4,29 @@ permalink: /community/
 layout: single
 ---
 
----
+# Community
 
-## Join us
-Connect, share ideas, and follow progress.
+## Join
 
-### Quick links
-- **Discord:** chat with the team and other players  
-  [Join Discord](https://discord.gg/UPhcFh7JaB){: .btn .btn--primary }
+- [Discord](https://discord.gg/UPhcFh7JaB){: .btn .btn--primary }
+- [GitHub](https://github.com/fallintodusk/alis){: .btn .btn--inverse target="_blank" rel="noopener" }
 
 ## Contribute
-- Open ideas or issues on GitHub.  
-  [Go to GitHub](https://github.com/fallintodusk){: target="_blank" rel="noopener" }
-- PRs are welcome.
 
----
+ALIS welcomes public review, issues, and contributions. Contributions use DCO.
+
+Start here:
+
+- [Contributing](/CONTRIBUTING.md)
+- [The Alis Pact](/ALIS_PACT.md)
+- [Trust](/trust/)
+
+## What Community Means Here
+
+- Public review of code and docs
+- Contribution to systems and workflows
+- Long-term resilience through openness
+
+## Hosting and Governance
+
+Community hosting is part of the long-term direction. Governance is intended to become more open over time.

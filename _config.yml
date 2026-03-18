@@ -20,8 +20,8 @@ rtl                      : # true, false (default) # turns direction of the page
 title                    : "ALIS"
 title_separator          : "-"
 subtitle                 : "World Reborn"
-name                     : "Your Name"
-description              : "Rebuilding the real world: A game project committed to realistic locations and interactions."
+name                     : "ALIS"
+description              : "Open-source post-apocalyptic survival game. Real places, real-world logic, open code, and a pact for honest design. Learn. Survive. Connect."
 url                      : #"http://localhost:4000"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "fallintodusk/fallintodusk.github.io" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -99,8 +99,8 @@ og_image                 : # Open Graph/Twitter default site image
 # For specifying social profiles
 # - https://developers.google.com/structured-data/customize/social-profiles
 social:
-  type                   : # Person or Organization (defaults to Person)
-  name                   : # If the user or organization name differs from the site's name
+  type                   : "Organization"
+  name                   : "ALIS"
   links: # An array of links to social media profiles
 
 # Analytics
@@ -113,52 +113,34 @@ analytics:
 
 # Site Author
 author:
-  name             : "Your Name"
+  name             : "ALIS"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I am an **amazing** person."
-  location         : "Somewhere"
+  bio              : "Open-source post-apocalyptic survival game. Real places, honest design."
+  location         :
   email            :
   links:
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      # url: "mailto:your.name@email.com"
     - label: "Website"
       icon: "fas fa-fw fa-link"
-      # url: "https://your-website.com"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      # url: "https://twitter.com/"
-    - label: "Facebook"
-      icon: "fab fa-fw fa-facebook-square"
-      # url: "https://facebook.com/"
+      url: "https://fall.is/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url: "https://github.com/"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      # url: "https://instagram.com/"
+      url: "https://github.com/fallintodusk"
+    - label: "Discord"
+      icon: "fab fa-fw fa-discord"
+      url: "https://discord.gg/UPhcFh7JaB"
 
 # Site Footer
 footer:
   links:
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      # url:
-    - label: "Facebook"
-      icon: "fab fa-fw fa-facebook-square"
-      # url:
+    - label: "Website"
+      icon: "fas fa-fw fa-link"
+      url: "https://fall.is/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url:
-    - label: "GitLab"
-      icon: "fab fa-fw fa-gitlab"
-      # url:
-    - label: "Bitbucket"
-      icon: "fab fa-fw fa-bitbucket"
-      # url:
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      # url:
+      url: "https://github.com/fallintodusk"
+    - label: "Discord"
+      icon: "fab fa-fw fa-discord"
+      url: "https://discord.gg/UPhcFh7JaB"
 
 
 # Reading Files

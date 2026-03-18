@@ -1,11 +1,13 @@
 # main links
 main:
-  - title: "About"
-    url: /about/
-  - title: "Core"
-    url: /core/
-  - title: "Roadmap"
-    url: /roadmap/
+  - title: "Vision"
+    url: /vision/
+  - title: "Systems"
+    url: /systems/
+  - title: "Status"
+    url: /status/
+  - title: "Trust"
+    url: /trust/
   - title: "Community"
     url: /community/
   # - title: "Sample Posts"
