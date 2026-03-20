@@ -43,9 +43,9 @@ Always check the fingerprint before trusting a downloaded key.
 
 Read the full policies:
 
-- [The Alis Pact](/ALIS_PACT.md)
-- [Contributing](/CONTRIBUTING.md)
-- [Trademarks](/TRADEMARKS.md)
+- [The Alis Pact](/pact/)
+- [Contributing](/contributing/)
+- [Trademarks](/trademarks/)
 
 ## What Is Open
 

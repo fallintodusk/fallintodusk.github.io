@@ -15,8 +15,8 @@ layout: single
 
 ALIS welcomes issues, reviews, and contributions. All contributions use DCO (Developer Certificate of Origin).
 
-- [Contributing guide](/CONTRIBUTING.md)
-- [The Alis Pact](/ALIS_PACT.md)
+- [Contributing guide](/contributing/)
+- [The Alis Pact](/pact/)
 - [Trust](/trust/)
 
 ## Hosting and Governance

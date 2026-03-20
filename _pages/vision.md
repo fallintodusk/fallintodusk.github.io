@@ -30,4 +30,4 @@ The world is reconstructed from real places. Streets, buildings, elevation — g
 
 - Source code under AGPL-3.0
 - Architecture and systems documentation public
-- A written pact for honest design — [The Alis Pact](/ALIS_PACT.md)
+- A written pact for honest design — [The Alis Pact](/pact/)

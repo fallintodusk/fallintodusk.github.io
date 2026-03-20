@@ -1,3 +1,9 @@
+---
+title: "Pact"
+permalink: /pact/
+layout: single
+---
+
 # The Alis Pact
 
 This is not a license. This is a social contract between the people who build Alis and the people who play, host, and extend it.
