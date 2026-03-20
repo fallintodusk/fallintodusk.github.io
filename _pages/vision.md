@@ -6,28 +6,30 @@ layout: single
 
 # Vision
 
-ALIS is a post-apocalyptic survival game where what you know matters as much as what you carry.
-
 ## Learn. Survive. Connect.
 
-### Learn
+ALIS builds a world close enough to reality that knowledge gained inside it transfers to life outside it. Real places, real logic.
 
-Real-world logic runs the game. Players who understand how things work — nutrition, weight, materials, risk — make better decisions.
+Survival is the challenge at the center of ALIS. Pressure, decisions under constraint, and the weight of each choice. This is what drives the experience.
 
-### Survive
+ALIS unites people around a shared vision of what the world could be - and gives them a place to build it.
 
-Calories, hydration, fatigue, injury, equipment, and carrying capacity form one coherent world. Systems reinforce each other.
+---
 
-### Connect
+## Place
 
-Cooperation in a difficult environment. Finding people, working together, building something that lasts longer than one life.
+ALIS worlds are reconstructed from real geography - streets, buildings, terrain, infrastructure. A route can be checked. A building can be verified. A distance can be measured.
 
-## Real Locations
+## Trust
 
-The world is reconstructed from real places. Streets, buildings, elevation — geography you can study before you play.
+Source code under AGPL-3.0. Signed releases. A public pact with verifiable limits. Community servers welcomed by architecture. [The Alis Pact](/pact/) defines how ALIS behaves and what it refuses.
 
-## Open Code
+## Continuity
 
-- Source code under AGPL-3.0
-- Architecture and systems documentation public
-- A written pact for honest design — [The Alis Pact](/pact/)
+The architecture is modular, the code is open, the governance is designed to evolve. ALIS is built so that stewardship can pass to those who carry the work forward.
+
+---
+
+## Current reality
+
+ALIS is in early development. The foundation is real - modular plugin architecture, data-driven definitions, vitals simulation, inventory systems, interaction interfaces, signed release tooling, and a public trust infrastructure. The full vision is a multi-year effort. The codebase is open and the principles govern what exists today at the same standard they will govern what is built tomorrow.
