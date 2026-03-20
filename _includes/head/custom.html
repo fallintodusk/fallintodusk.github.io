@@ -11,4 +11,16 @@
 
 <!-- insert favicons. use https://realfavicongenerator.net/ -->
 
+<!-- Active nav link highlight -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var path = window.location.pathname;
+  document.querySelectorAll(".greedy-nav .visible-links a").forEach(function(link) {
+    if (link.getAttribute("href") === path) {
+      link.classList.add("active");
+    }
+  });
+});
+</script>
+
 <!-- end custom head snippets -->
