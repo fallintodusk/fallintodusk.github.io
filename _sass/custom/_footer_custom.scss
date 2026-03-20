@@ -1,0 +1,21 @@
+.footer-policy-links {
+  text-align: center;
+  padding: 0.5em 0 0.75em;
+  font-size: 0.75em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  a {
+    color: $warning-color;
+    text-decoration: none;
+    font-weight: 600;
+    &:hover {
+      color: mix(#000, $warning-color, 20%);
+    }
+  }
+
+  .footer-policy-sep {
+    margin: 0 0.5em;
+    color: $muted-text-color;
+  }
+}
