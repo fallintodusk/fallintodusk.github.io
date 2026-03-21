@@ -19,3 +19,14 @@
     color: $muted-text-color;
   }
 }
+
+.page__footer-copyright {
+  a {
+    color: $warning-color;
+    font-weight: 600;
+    text-decoration: none;
+    &:hover {
+      color: mix(#000, $warning-color, 20%);
+    }
+  }
+}
