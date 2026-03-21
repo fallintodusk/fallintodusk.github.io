@@ -19,7 +19,7 @@ locale                   : "en-US"
 rtl                      : # true, false (default) # turns direction of the page into right to left for RTL languages
 title                    : "ALIS — World Reborn"
 title_separator          : "-"
-subtitle                 : "World Reborn"
+subtitle                 :
 name                     : "ALIS"
 description              : "Open-source post-apocalyptic survival game. Real places, real-world logic, open code. Learn. Survive. Connect."
 url                      : #"http://localhost:4000"
