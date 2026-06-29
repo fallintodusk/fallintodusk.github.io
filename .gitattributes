@@ -57,3 +57,8 @@
 # Miscellaneous large binary files
 *.psd filter=lfs diff=lfs merge=lfs -text
 *.ai filter=lfs diff=lfs merge=lfs -text
+
+# Web-served images for fall.is must be plain Git blobs.
+# GitHub Pages does not resolve Git LFS pointers, so an LFS-tracked image
+# would deploy as broken pointer text. The README teaser is tiny; keep it inline.
+assets/images/teaser.jpg -filter -diff -merge -text
