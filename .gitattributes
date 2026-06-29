@@ -18,14 +18,18 @@
 *.fbx filter=lfs diff=lfs merge=lfs -text
 *.stl filter=lfs diff=lfs merge=lfs -text
 
-# High-quality image files tracked by Git LFS
-*.png filter=lfs diff=lfs merge=lfs -text
-*.jpg filter=lfs diff=lfs merge=lfs -text
-*.jpeg filter=lfs diff=lfs merge=lfs -text
-*.gif filter=lfs diff=lfs merge=lfs -text
-*.tiff filter=lfs diff=lfs merge=lfs -text
-*.bmp filter=lfs diff=lfs merge=lfs -text
-*.webp filter=lfs diff=lfs merge=lfs -text
+# Web images are committed as plain Git blobs, NOT Git LFS.
+# GitHub Pages "deploy from a branch" builds Jekyll itself and does not resolve
+# LFS pointers, so an LFS-tracked image would deploy as broken pointer text.
+# These files are small; keep them inline. Reserve LFS for large, non-served
+# source art only (see psd/ai below).
+*.png -text
+*.jpg -text
+*.jpeg -text
+*.gif -text
+*.tiff -text
+*.bmp -text
+*.webp -text
 
 # Video files tracked by Git LFS
 *.mp4 filter=lfs diff=lfs merge=lfs -text
@@ -57,8 +61,3 @@
 # Miscellaneous large binary files
 *.psd filter=lfs diff=lfs merge=lfs -text
 *.ai filter=lfs diff=lfs merge=lfs -text
-
-# Web-served images for fall.is must be plain Git blobs.
-# GitHub Pages does not resolve Git LFS pointers, so an LFS-tracked image
-# would deploy as broken pointer text. The README teaser is tiny; keep it inline.
-assets/images/teaser.jpg -filter -diff -merge -text
