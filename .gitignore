@@ -27,3 +27,6 @@ node_modules/
 *.bak
 *.old
 .vscode/settings.json
+
+#tmp
+tmp/my_changes.txt

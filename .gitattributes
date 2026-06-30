@@ -38,6 +38,9 @@
 *.mkv filter=lfs diff=lfs merge=lfs -text
 *.webm filter=lfs diff=lfs merge=lfs -text
 
+# Small served homepage preview: must be a plain Git blob for GitHub Pages.
+assets/media/alis-trailer-loop.mp4 -filter -diff -merge -text
+
 # Audio files tracked by Git LFS
 *.wav filter=lfs diff=lfs merge=lfs -text
 *.mp3 filter=lfs diff=lfs merge=lfs -text
