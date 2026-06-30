@@ -28,5 +28,5 @@ node_modules/
 *.old
 .vscode/settings.json
 
-#tmp
+# tmp
 tmp/my_changes.txt

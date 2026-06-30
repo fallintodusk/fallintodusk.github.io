@@ -66,6 +66,9 @@ Implementation checklist:
 - Do not hide the video for `prefers-reduced-motion` unless a separate poster
   asset is added; with no poster and no button, hiding the video leaves an empty
   clickable area.
+- Also build the trailer styles as `assets/css/trailer.css` and load that file
+  through `_includes/head/custom.html` with a timestamp query string. This keeps
+  production correct when `/assets/css/main.css` is still cached at the edge.
 - After SCSS/include changes, verify built output. On WSL2 use:
   `bundle exec jekyll serve --host 0.0.0.0 --force_polling`
 
