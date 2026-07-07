@@ -14,7 +14,7 @@ Choose the path that fits what you can do today.
 
 - [Open the GitHub Start Here discussion](https://github.com/fallintodusk/alis/discussions/1){: .btn .btn--primary target="_blank" rel="noopener" }
 - [Play / Test](/play/){: .btn .btn--inverse }
-- [Join Discord](https://discord.gg/UPhcFh7JaB){: .btn .btn--inverse target="_blank" rel="noopener" }
+- [Join Discord](https://discord.gg/rj56ThURtT){: .btn .btn--inverse target="_blank" rel="noopener" }
 - [GitHub](https://github.com/fallintodusk/alis){: .btn .btn--inverse target="_blank" rel="noopener" }
 
 ## Contribute
