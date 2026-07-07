@@ -21,6 +21,9 @@ ALIS is an open-source UE5 survival sim: real cities, server-authoritative syste
 | Source license | AGPL-3.0-only |
 | World content license | CC BY-NC-SA-4.0 |
 | Website | https://fall.is/ |
+| Play / develop | https://fall.is/play/ |
+| Releases | https://github.com/fallintodusk/alis/releases |
+| Trailer | https://www.youtube.com/watch?v=eIJHYsPgNnM |
 | Trust | https://fall.is/trust/ |
 
 ## Long Description
@@ -29,7 +32,12 @@ ALIS is an open-source survival simulation built on Unreal Engine 5, set in post
 
 ## Assets
 
-Press-kit ZIP, screenshots, logo exports, and trailer links are not published here yet. They will be listed once the asset manifest and rights checks are complete.
+Available now:
+
+- [Trailer on YouTube](https://www.youtube.com/watch?v=eIJHYsPgNnM){: target="_blank" rel="noopener" }
+- [Play / develop](/play/)
+- [Releases](https://github.com/fallintodusk/alis/releases){: target="_blank" rel="noopener" }
+- [Release verification](/trust/)
 
 ## Contact
 

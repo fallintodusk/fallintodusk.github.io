@@ -1,5 +1,7 @@
 # main links
 main:
+  - title: "Play"
+    url: /play/
   - title: "Vision"
     url: /vision/
   - title: "Systems"
