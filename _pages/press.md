@@ -6,7 +6,7 @@ layout: single
 
 # Press
 
-ALIS is an open-source UE5 survival sim: real cities, server-authoritative systems, signed releases, community servers, and a non-extractive pact.
+ALIS builds an open-source UE5 survival world from real places, with a signed public prototype, source continuity, and a non-extractive pact.
 
 ## Facts
 
@@ -28,7 +28,7 @@ ALIS is an open-source UE5 survival sim: real cities, server-authoritative syste
 
 ## Long Description
 
-ALIS is an open-source survival simulation built on Unreal Engine 5, set in post-apocalyptic real-world cities rather than fictional substitutes. The codebase is organized into modular plugin tiers and concrete systems: server-authoritative inventory, vitals simulation, data-driven dialogue, Mind thought guidance, interaction tracing, object capabilities, typed settings, and a six-phase loading pipeline. Source is AGPL-3.0; world content is CC BY-NC-SA; releases are signed and publicly verifiable. Community servers are first-class. The pact keeps ALIS checkable, non-extractive, and respectful of contributors.
+ALIS is building an open-source survival world on Unreal Engine 5 from real places, beginning with a reconstructed post-apocalyptic city location. The current public build is an in-development single-player prototype people can run, verify, and inspect. The codebase is organized into modular plugin tiers and concrete systems: server-authoritative inventory, vitals simulation, data-driven dialogue, Mind thought guidance, interaction tracing, object capabilities, typed settings, and a six-phase loading pipeline. Source is AGPL-3.0; world content is CC BY-NC-SA; releases are signed and publicly verifiable. A dedicated-server target is checked into the public source and build commands are documented; current evidence does not establish a tested, supported public server package or working multiplayer hosting path. The pact keeps ALIS checkable, non-extractive, and respectful of contributors, with continuity anchored in source, signatures, and stewardship rather than a single operator.
 
 ## Assets
 

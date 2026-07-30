@@ -10,7 +10,7 @@ https://www.youtube.com/watch?v=eIJHYsPgNnM
 Selected repo assets:
 
 - `assets/media/alis-trailer-loop.mp4` uses the no-inventory baseline:
-  `C:\Users\vslvg\OneDrive\Desktop\Temp\teaser-homepage-41s-720-crf34-no-inventory.mp4`
+  `%USERPROFILE%\OneDrive\Desktop\Temp\teaser-homepage-41s-720-crf34-no-inventory.mp4`
 - Do not add a trailer poster for now.
 - Do not add a visible play button or "Watch trailer" label; the whole video
   card opens YouTube in a new tab.
@@ -111,13 +111,13 @@ Reference links:
 Current working source:
 
 ```text
-C:\Users\vslvg\OneDrive\Desktop\Temp\teaser-clips-merged-no-inventory-temp.mp4
+%USERPROFILE%\OneDrive\Desktop\Temp\teaser-clips-merged-no-inventory-temp.mp4
 ```
 
 Cut history:
 
 - Initial merged source used:
-  - `C:\Users\vslvg\OneDrive\Desktop\Temp\teaser-clips-merged-temp.mp4`
+  - `%USERPROFILE%\OneDrive\Desktop\Temp\teaser-clips-merged-temp.mp4`
   - `00:05.005-00:11.857`
   - `00:17.861-00:53.486`
 - Removed inventory segment from merged source:
@@ -127,21 +127,21 @@ Known compression tests:
 
 - original merged source `720x406`, 24 fps, no audio, CRF 34: `2.3 MB`,
   `42.459s`
-  - `C:\Users\vslvg\OneDrive\Desktop\Temp\teaser-homepage-42s-720-crf34-original-comparison.mp4`
+  - `%USERPROFILE%\OneDrive\Desktop\Temp\teaser-homepage-42s-720-crf34-original-comparison.mp4`
 - no-inventory `720x406`, 24 fps, no audio, CRF 34: `2.2 MB`, `41.167s`
-  - `C:\Users\vslvg\OneDrive\Desktop\Temp\teaser-homepage-41s-720-crf34-no-inventory.mp4`
+  - `%USERPROFILE%\OneDrive\Desktop\Temp\teaser-homepage-41s-720-crf34-no-inventory.mp4`
 - no-inventory conservative desaturation, saturation `0.78`, `720x406`,
   24 fps, no audio, CRF 34: `2.2 MB`, `41.167s`
-  - `C:\Users\vslvg\OneDrive\Desktop\Temp\teaser-homepage-41s-720-crf34-desat78-no-inventory.mp4`
+  - `%USERPROFILE%\OneDrive\Desktop\Temp\teaser-homepage-41s-720-crf34-desat78-no-inventory.mp4`
 - no-inventory stronger desaturation, saturation `0.68`, `720x406`, 24 fps,
   no audio, CRF 34: `2.2 MB`, `41.167s`
-  - `C:\Users\vslvg\OneDrive\Desktop\Temp\teaser-homepage-41s-720-crf34-desat68-no-inventory.mp4`
+  - `%USERPROFILE%\OneDrive\Desktop\Temp\teaser-homepage-41s-720-crf34-desat68-no-inventory.mp4`
 - no-inventory monochrome, saturation `0`, `720x406`, 24 fps, no audio,
   CRF 34: `2.1 MB`, `41.167s`
-  - `C:\Users\vslvg\OneDrive\Desktop\Temp\teaser-homepage-41s-720-crf34-mono-no-inventory.mp4`
+  - `%USERPROFILE%\OneDrive\Desktop\Temp\teaser-homepage-41s-720-crf34-mono-no-inventory.mp4`
 - no-inventory contrast monochrome, saturation `0`, `720x406`, 24 fps,
   no audio, CRF 34: `2.2 MB`, `41.167s`
-  - `C:\Users\vslvg\OneDrive\Desktop\Temp\teaser-homepage-41s-720-crf34-mono-contrast-no-inventory.mp4`
+  - `%USERPROFILE%\OneDrive\Desktop\Temp\teaser-homepage-41s-720-crf34-mono-contrast-no-inventory.mp4`
 - rejected experiments were too stylized for the site: ash, ember, ember bloom,
   cold abandoned, damaged archive, bleak survival, and strong damaged archive.
 
@@ -154,7 +154,7 @@ Suggested 41 second no-inventory baseline encode:
 ```bash
 mkdir -p assets/media
 
-ffmpeg -i /mnt/c/Users/vslvg/OneDrive/Desktop/Temp/teaser-clips-merged-no-inventory-temp.mp4 \
+ffmpeg -i /mnt/c/Users/<windows-user>/OneDrive/Desktop/Temp/teaser-clips-merged-no-inventory-temp.mp4 \
   -vf "scale=720:-2:flags=lanczos,fps=24,eq=brightness=-0.04:contrast=1.08:saturation=0.92,vignette=PI/5,fade=t=in:st=0:d=0.5,fade=t=out:st=40.3:d=0.8,format=yuv420p" \
   -an \
   -c:v libx264 -profile:v high -level 3.1 \
@@ -168,7 +168,7 @@ For conservative desaturation comparison, use the same command with
 For monochrome comparison, use `saturation=0`. For contrast monochrome, use:
 
 ```bash
-ffmpeg -i /mnt/c/Users/vslvg/OneDrive/Desktop/Temp/teaser-clips-merged-no-inventory-temp.mp4 \
+ffmpeg -i /mnt/c/Users/<windows-user>/OneDrive/Desktop/Temp/teaser-clips-merged-no-inventory-temp.mp4 \
   -vf "scale=720:-2:flags=lanczos,fps=24,eq=brightness=-0.055:contrast=1.18:saturation=0:gamma=0.96,vignette=PI/4.8,fade=t=in:st=0:d=0.5,fade=t=out:st=40.3:d=0.8,format=yuv420p" \
   -an \
   -c:v libx264 -profile:v high -level 3.1 \
