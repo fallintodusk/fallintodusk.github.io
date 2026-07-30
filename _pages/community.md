@@ -27,7 +27,9 @@ newsletter also has an RSS feed. This page remains the stable project route if t
 
 ## Contribute
 
-ALIS welcomes issues, reviews, and contributions. All contributions use DCO (Developer Certificate of Origin). Developers, testers, artists, writers, translators, server operators, and survival-game players can all help.
+ALIS welcomes issues, reviews, and contributions. Developers, testers, artists,
+writers, translators, server operators, and survival-game players can all help.
+The contribution process and applicable terms live in the main guide.
 
 - [Good first issues](https://github.com/fallintodusk/alis/issues){: target="_blank" rel="noopener" }
 - [Contributing guide](/contributing/)

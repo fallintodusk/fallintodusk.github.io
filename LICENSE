@@ -1,5 +1,9 @@
-# Alis Open Development Policy (AODL)
+# ALIS License Notice
 
-This repository is multi-licensed by component (AGPL-3.0 / CC BY-NC-SA 4.0 / MPL-2.0).
+Licensing for ALIS-owned material in this repository is governed by the
+component policy in the main game repository. That policy is the sole source of
+truth.
 
-[Read the full license policy](https://github.com/fallintodusk/alis/blob/main/LICENSE)
+[Read the ALIS Component License Policy](https://github.com/fallintodusk/alis/blob/main/LICENSE)
+
+Third-party material remains under its original notices and terms.

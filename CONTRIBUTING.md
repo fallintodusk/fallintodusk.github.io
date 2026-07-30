@@ -1,5 +1,5 @@
-# Contributing to Alis
+# Contributing to ALIS
 
-We welcome contributions under the Developer Certificate of Origin (DCO).
+The main game repository owns the contribution process and applicable terms.
 
-[Read the full contributing guide](https://github.com/fallintodusk/alis/blob/main/CONTRIBUTING.md)
+[Read the ALIS contributing guide](https://github.com/fallintodusk/alis/blob/main/CONTRIBUTING.md)

@@ -10,15 +10,25 @@ How to verify what ALIS claims.
 
 ## Public Source
 
-- Full source code under AGPL-3.0
+- Public source code
 - Architecture and systems documentation
 - Mirror-friendly source publication
 
 ## Release Verification
 
-- Checksums and detached signatures on every release
-- Verification helpers included
-- Site-published public key and fingerprint
+Packaged ALIS releases authenticate `SHA256SUMS.txt` with a detached signature.
+The manifest covers the release payload, bundled public key, install guide, and
+verification helpers.
+
+- Confirm the bundled key against the fingerprint published below.
+- Run the bundled `VERIFY_RELEASE.bat`, or verify the detached signature and
+  listed SHA-256 hashes manually.
+
+## Signed Project Messages
+
+The same signing identity may authenticate important project messages published
+through different channels. A valid signature proves control of the signing key;
+always confirm the exact fingerprint and message bytes.
 
 ## Public Key
 
@@ -32,6 +42,13 @@ Download:
 - [Direct from fall.is](/assets/security/public-key.asc){: type="application/pgp-keys" }
 
 Always check the fingerprint before trusting a downloaded key.
+
+## License and Provenance
+
+The main game repository owns the operative policy for code, tools, assets,
+data, generated artifacts, contributions, and third-party exclusions.
+
+- [ALIS Component License Policy](/license/)
 
 ## Project Commitments
 
@@ -47,8 +64,8 @@ Read the full policies:
 - [Contributing](/contributing/)
 - [Trademarks](/trademarks/)
 
-## What Is Open
+## Public Evidence
 
-- Code, architecture docs, build and verification workflows
+- Code, architecture docs, and build and verification workflows
 - Contribution and policy documents
-- Licensed asset payloads and infrastructure are handled separately
+- Current development status and system boundaries

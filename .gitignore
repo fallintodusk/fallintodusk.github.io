@@ -29,4 +29,4 @@ node_modules/
 .vscode/settings.json
 
 # tmp
-tmp/my_changes.txt
+tmp/

@@ -22,7 +22,10 @@ ALIS worlds are reconstructed from real geography - streets, buildings, terrain,
 
 ## Trust
 
-Source code under AGPL-3.0. Signed releases. A public pact with verifiable limits. The pact welcomes community servers; the operational hosting path remains in development. If ALIS claims something, it can be checked. [The Alis Pact](/pact/) defines how ALIS behaves and what it refuses.
+Public source, a [public license policy](/license/), and signed releases. A pact
+with verifiable limits. The pact welcomes community servers; the operational
+hosting path remains in development. If ALIS claims something, it can be checked.
+[The Alis Pact](/pact/) defines how ALIS behaves and what it refuses.
 
 ## Continuity
 
@@ -32,4 +35,9 @@ The architecture is modular, the code is open, the governance is designed to evo
 
 ## Current reality
 
-ALIS is in early development. The foundation is real - modular plugin architecture, data-driven definitions, vitals simulation, inventory systems, interaction interfaces, signed release tooling, and a public trust infrastructure. The full vision is a multi-year effort. The codebase is open and the principles govern what exists today at the same standard they will govern what is built tomorrow.
+ALIS is in early development. The foundation is real - modular plugin
+architecture, data-driven definitions, vitals simulation, inventory systems,
+interaction interfaces, release signing and verification tooling, and public
+project policies. The full vision is a multi-year effort. The codebase is open
+and the principles govern what exists today at the same standard they will
+govern what is built tomorrow.

@@ -10,9 +10,9 @@
 
 ## Content Coupling Rules
 
-- Prefer stable index links over version-specific links unless the page is explicitly about that exact release. Use `/play/`, GitHub Releases, `/trust/`, and `/community/` instead of pinning `vX.Y.Z` URLs in general pages.
-- Do not duplicate instructions owned by the destination page. Link to the source of truth instead of copying issue-reporting steps, release verification steps, license text, or contribution process details into every page.
-- Keep page responsibilities separate: `/play/` owns download / verify / feedback / build-with-license framing; `/community/` owns Discord, contribution entry, and governance; `/press/` owns press facts and links.
+- Prefer stable index links over version-specific links unless the page is explicitly about that exact release. Use `/play/`, `/license/`, GitHub Releases, `/trust/`, and `/community/` instead of pinning `vX.Y.Z` URLs in general pages.
+- Do not duplicate instructions owned by the destination page. Link to the source of truth instead of copying issue-reporting steps, license terms, or contribution process details into every page.
+- Keep page responsibilities separate: `/play/` owns downloads, feedback, and build entry; `/license/` owns the stable legal SOT pointer; `/trust/` owns release verification, signing identity, project commitments, and public evidence; `/community/` owns Discord, contribution entry, and governance; `/press/` owns press facts and links.
 
 ## Jekyll on WSL2
 
