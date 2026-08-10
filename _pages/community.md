@@ -22,7 +22,7 @@ Choose the path that fits what you can do today.
 Follow ALIS without depending on a social feed. Substack currently provides email delivery, and the
 newsletter also has an RSS feed. This page remains the stable project route if the provider changes.
 
-- [Subscribe by email](https://alis964309.substack.com/){: .btn .btn--primary target="_blank" rel="noopener" }
+- [Subscribe by email](https://alis964309.substack.com/?utm_source=fallis-community&utm_medium=referral){: .btn .btn--primary target="_blank" rel="noopener" }
 - [Newsletter RSS](https://alis964309.substack.com/feed){: .btn .btn--inverse target="_blank" rel="noopener" }
 
 ## Contribute

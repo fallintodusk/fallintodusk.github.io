@@ -18,7 +18,7 @@ public prototype, source continuity, and a non-extractive pact.
 | Developer | ALIS Project |
 | Genre | Survival simulation, open world, post-apocalyptic, real-geography |
 | Platform | PC. Windows / Win64 release path first; Linux support TBD until verified. |
-| Engine | Unreal Engine 5.7 |
+| Engine | Unreal Engine 5. Exact version is declared in [Alis.uproject](https://github.com/fallintodusk/alis/blob/main/Alis.uproject) |
 | License policy | https://fall.is/license/ |
 | Website | https://fall.is/ |
 | Play / develop | https://fall.is/play/ |
