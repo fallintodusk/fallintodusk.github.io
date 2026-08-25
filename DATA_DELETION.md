@@ -1,7 +1,8 @@
 # Data deletion
 
-ALIS runs no account system and does not intentionally collect personal data about anyone other
-than its own operator. In practice there is normally nothing held about you to delete.
+ALIS runs no account system and does not build profiles or collect personal data about visitors
+or followers. Apart from information people voluntarily send us, there is normally little or
+nothing held about an individual.
 
 ## Asking ALIS to delete data
 
