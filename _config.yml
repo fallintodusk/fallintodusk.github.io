@@ -22,7 +22,7 @@ title_separator          : "-"
 subtitle                 :
 name                     : "ALIS"
 description              : "Open-source post-apocalyptic survival game. Real places, real-world logic, open code. Learn. Survive. Connect."
-url                      : #"http://localhost:4000"
+url                      : "https://fall.is"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "fallintodusk/fallintodusk.github.io" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
