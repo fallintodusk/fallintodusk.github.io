@@ -92,13 +92,15 @@ On the homepage trailer card, show one of two muted loop clips chosen at random 
 - `assets/media/alis-trailer-loop.mp4`: h264, 720x406, 24 fps, 41.167 s, 2,301,411 bytes (~447 kbps), no audio.
 - Raw `WorldGeneration.mp4`: h264 1920x1080 **30 fps** + aac audio, 68.331 s, 134,823,232 bytes (~15.8 Mbps). 30 fps ⇒ ~2050 source frames; forcing 24 fps drops ~410 frames (~20%).
 - Clean encodes of the raw clip (`scale=720:-2:flags=lanczos,fps=30,format=yuv420p`, `-an`, libx264 high/3.1, `-preset slow`, `-movflags +faststart`), no colour grade:
-  - CRF 34 → 2,493,452 bytes (2.4 MiB)
-  - CRF 32 → 3,051,822 bytes (2.9 MiB)
-  - CRF 30 → 3,784,898 bytes (3.6 MiB)
-  - CRF 28 → 4,746,300 bytes (4.5 MiB)
-  - CRF 34, first 45 s only → 1,676,451 bytes (1.6 MiB)
-  - CRF 34 at 640-wide → 2,075,779 bytes (2.0 MiB) — measured, not part of the fallback ladder
-- Homepage budget convention (inherited from the prior card): ≤3 MiB as reported by `du -h`, i.e. 3,145,728 bytes. CRF 34 and CRF 32 fit; CRF 30 does not.
+  - Full clip, CRF 34 → 2,493,452 bytes (2.4 MiB)
+  - Full clip, CRF 32 → 3,051,822 bytes (2.9 MiB)
+  - Full clip, CRF 30 → 3,784,898 bytes (3.6 MiB) — over budget
+  - Full clip, CRF 28 → 4,746,300 bytes (4.5 MiB) — over budget
+  - 45 s proxy, CRF 32 → 2,052,365 bytes (2.0 MiB)
+  - 45 s proxy, CRF 30 → 2,548,280 bytes (2.4 MiB)
+  - 45 s proxy, CRF 28 → 3,203,397 bytes — over budget
+  - Full clip, CRF 34 at 640-wide → 2,075,779 bytes (2.0 MiB) — measured, not part of the fallback ladder
+- Homepage budget: ≤3 MiB = **3,145,728 bytes**, enforced on exact file length (`stat -c '%s %n'`); `du -h` is informational only.
 - The earlier graded 24 fps CRF 34 encode was 2,215,801 bytes; ~278 KB (11%) of its saving came from dropping to 24 fps and grading detail away.
 - Raw clip starts and ends on bright, fully saturated frames (frames at 0/12/24/36/48/60/66 s), so it has no existing fade and a baked fade would be new editorial content.
 - `_posts/2026-10-06-n000005-build-the-game.md` ends with `Watch https://youtu.be/zZOI2uBskSA`; `tmp/resources/.../n5_BuildTheGame.webp` and `frame_49_990.png` are frames of `WorldGeneration.mp4`. No other file in the site repo maps this clip to a URL.
@@ -110,7 +112,7 @@ On the homepage trailer card, show one of two muted loop clips chosen at random 
 **Inferences**
 
 - `WorldGeneration.mp4` is the "Build the Game" trailer (n000005), so its YouTube destination is `https://youtu.be/zZOI2uBskSA`. The thumbnail match is strong and the URL is operator-confirmed by D5.
-- The world-generation footage is flat-shaded and low-detail, so CRF 34 (2.4 MiB) and the CRF 32 fallback (2.9 MiB) both fit the ≤3 MiB budget at 30 fps; CRF 30 (3.6 MiB) does not. The size trade for keeping 30 fps over 24 fps at CRF 34 is ~0.28 MB.
+- The world-generation footage is flat-shaded and low-detail, so the full clip fits at CRF 34 (2.4 MiB) and CRF 32 (2.9 MiB) but not at CRF 30 (3.6 MiB); a 45 s proxy fits at CRF 32 (2.0 MiB) and CRF 30 (2.4 MiB). The size trade for keeping 30 fps over 24 fps at CRF 34 is ~0.28 MB.
 
 **Assumptions / unverified areas**
 
@@ -196,7 +198,7 @@ The `<video>` element already owns playback lifecycle; the simplest design lets 
     -an -c:v libx264 -profile:v high -level 3.1 -crf 34 -preset slow -movflags +faststart \
     assets/media/alis-worldgen-loop.mp4
   ```
-  Measured result: 2,493,452 bytes (2.4 MiB). Fallback ladder if the in-motion review shows artefacts on the fast flythroughs or text: (1) CRF 32 / 720 / 30 fps → 3,051,822 bytes (2.9 MiB); (2) if still unacceptable or over the ≤3 MiB budget, shorten the homepage proxy (measured example: first 45 s at CRF 34 / 720 / 30 fps → 1,676,451 bytes). Keep the full-length version on YouTube. Never reduce the frame rate, and do not treat a lower resolution as a quality fix.
+  Measured result: 2,493,452 bytes (2.4 MiB). Fallback ladder if the in-motion review shows artefacts on the fast flythroughs or text: (1) full clip, CRF 32 / 720 / 30 fps → 3,051,822 bytes (2.9 MiB); (2) if still unacceptable, shorten the homepage proxy and encode at **CRF 30 or better**, measuring until the exact file length is ≤3,145,728 bytes (measured examples: 45 s at CRF 30 → 2,548,280 bytes; 45 s at CRF 32 → 2,052,365 bytes). Do not return to CRF 34 once it has been rejected: shortening does not fix CRF-34 artefacts. Keep the full-length version on YouTube. Never reduce the frame rate, and do not treat a lower resolution as a quality fix.
 - [ ] Add the plain-blob exemption to `.gitattributes` next to the existing one:
   ```gitattributes
   assets/media/alis-worldgen-loop.mp4 -filter -diff -merge -text
@@ -219,7 +221,7 @@ The `<video>` element already owns playback lifecycle; the simplest design lets 
 
 ### Green evidence
 
-- Clip facts: `du -h assets/media/alis-trailer-loop.mp4 assets/media/alis-worldgen-loop.mp4` (each ≤3 MiB) and `ffprobe -hide_banner -v error -show_entries stream=codec_name,width,height,r_frame_rate -show_entries format=duration -of default=noprint_wrappers=1 <file>` (h264, 720-wide, no audio; existing clip 24 fps, new clip 30 fps).
+- Clip facts: `stat -c '%s %n' assets/media/alis-trailer-loop.mp4 assets/media/alis-worldgen-loop.mp4` → each exact byte count must be ≤3,145,728 (`du -h` is informational only), and `ffprobe -hide_banner -v error -show_entries stream=codec_name,width,height,r_frame_rate -show_entries format=duration -of default=noprint_wrappers=1 <file>` (h264, 720-wide, no audio; existing clip 24 fps, new clip 30 fps).
 - Blob policy: `git check-attr -a -- assets/media/alis-worldgen-loop.mp4` shows no `filter: lfs`; `file assets/media/alis-worldgen-loop.mp4` reports MP4 data.
 - Build: `bundle exec jekyll build` succeeds; `_site/index.html` keeps `src`+`loop` on the video and contains the dots; `_site/assets/media/alis-worldgen-loop.mp4`, `_site/assets/js/alis-trailer.js`, and dot rules in `_site/assets/css/trailer.css` exist.
 - Runtime smoke (WSL2 polling per project rules): `bundle exec jekyll serve --host 0.0.0.0 --force_polling`, open `/`, reload several times for the random start, drive `ended` to confirm advance + wrap, confirm the card `href` follows the active clip, click and keyboard-tab the dots, check a narrow mobile width, emulate `prefers-reduced-motion`, and disable JavaScript to confirm the first clip still autoplays and loops with no dots.
@@ -229,7 +231,7 @@ The `<video>` element already owns playback lifecycle; the simplest design lets 
 
 - **Authoritative stable owner:** root `README.md` — add a short "Homepage preview media" section.
 - **Router / TOC update:** none (no docs router exists; `/docs` is not a convention here).
-- **Content to add:** the two clip files and their roles; the shared encode recipe with the "compression only, no grade, keep source frame rate" rule; the ≤3 MiB budget; 720-wide / no audio / faststart; each clip keeps its source frame rate (existing 24 fps, new 30 fps); the `.gitattributes` plain-blob requirement; the destination the card link uses for each clip.
+- **Content to add:** the two clip files and their roles; the shared encode recipe with the "compression only, no grade, keep source frame rate" rule; the ≤3 MiB (3,145,728-byte) budget enforced on exact file length; 720-wide / no audio / faststart; each clip keeps its source frame rate (existing 24 fps, new 30 fps); the `.gitattributes` plain-blob requirement; the destination the card link uses for each clip.
 - **Duplication avoided:** `index.html` and `alis-trailer.js` own the runtime contract; README names the files but does not restate the markup or JS. The completed `todo/done/homepage-trailer-proxy-card.md` is a historical record and is left untouched.
 
 ## Rollout and rollback
@@ -240,7 +242,7 @@ The `<video>` element already owns playback lifecycle; the simplest design lets 
 
 ## Completion criteria
 
-`PASS` requires: both MP4s present, ≤3 MiB, h264/720-wide/no-audio with the existing clip at 24 fps and the new clip at 30 fps; no grade or baked fade in the new clip; `alis-worldgen-loop.mp4` not LFS-tracked; `bundle exec jekyll build` clean with the expected `_site` outputs; runtime evidence of random start, `ended` advance + wrap, dot switching (mouse + keyboard), card `href` following the active clip, and the no-JS fallback still autoplaying and looping; an in-motion CRF review recorded; no theme files modified; README section added; no unrelated changes.
+`PASS` requires: both MP4s present with an exact byte count ≤3,145,728 each (`stat -c %s`), h264/720-wide/no-audio with the existing clip at 24 fps and the new clip at 30 fps; no grade or baked fade in the new clip; `alis-worldgen-loop.mp4` not LFS-tracked; `bundle exec jekyll build` clean with the expected `_site` outputs; runtime evidence of random start, `ended` advance + wrap, dot switching (mouse + keyboard), card `href` following the active clip, and the no-JS fallback still autoplaying and looping; an in-motion CRF review recorded; no theme files modified; README section added; no unrelated changes.
 
 ## Review record
 
@@ -272,4 +274,12 @@ The `<video>` element already owns playback lifecycle; the simplest design lets 
 - Fix 1 (frame rate): the contradictory "both MP4s 30 fps" requirements are removed. Invariants 7/10, Green evidence, Documentation plan, and Completion criteria now require each clip to preserve its own source frame rate (existing 24 fps, new 30 fps) and never reduce fps for size; the existing clip is not re-encoded.
 - Fix 2 (budget vs fallback): CRF 30 / 720 (3.6 MiB) is dropped as a fallback because it exceeds the budget. Measured ladder is CRF 34 / 720 / 30 fps (2.4 MiB) → CRF 32 / 720 / 30 fps (2.9 MiB) → shorten the proxy (45 s at CRF 34 = 1.6 MiB), with the full trailer staying on YouTube. The gate is stated explicitly as ≤3 MiB (`du -h`, 3,145,728 bytes), matching the prior card's convention.
 - Cleanup: A7's stale "pending Q5 confirmation before deploy" clause removed; A7 remains `[RESOLVED by D5]`.
+- No code changed; implementation still awaits an explicit go.
+
+### 2026-10-06 - Third review round (PATCH) and revision
+
+- **Trigger (operator):** relayed review: "the final quality fallback goes back to a rejected quality setting ... `du -h` cannot enforce an exact 3 MiB byte limit ... After these two corrections: PASS on the plan."
+- Both required fixes accepted; no reviewer point refuted in this round.
+- Fix 1 (fallback ladder): step 2 no longer shortens at CRF 34. It now shortens the proxy and encodes at **CRF 30 or better** until the exact length is ≤3,145,728 bytes (measured: 45 s at CRF 30 = 2,548,280 B; 45 s at CRF 32 = 2,052,365 B; 45 s at CRF 28 = 3,203,397 B, over budget). Never reduce fps or resolution; full trailer stays on YouTube.
+- Fix 2 (acceptance test): the ≤3 MiB gate is enforced on exact file length via `stat -c '%s %n'` (≤3,145,728 bytes); `du -h` is informational only. Applied in Evidence, Documentation plan, and Completion criteria.
 - No code changed; implementation still awaits an explicit go.
