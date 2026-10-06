@@ -1,6 +1,6 @@
 # Homepage dual-video trailer carousel
 
-**Status:** REVIEW REQUIRED
+**Status:** IMPLEMENTED — machine verification PASS; one operator-only item outstanding (in-motion CRF 34 review)
 **Scope:** Homepage trailer card (`index.html`), custom Sass, custom head include, new homepage JS, `assets/media`, `.gitattributes`
 **Stable documentation owner:** root `README.md` (proposed short "Homepage preview media" section). No existing stable doc owns the served preview clips; the recipe currently lives only in the completed `todo/done/homepage-trailer-proxy-card.md`.
 
@@ -190,8 +190,8 @@ The `<video>` element already owns playback lifecycle; the simplest design lets 
 
 ## Implementation tasks
 
-- [ ] Set the second item's link to `https://youtu.be/zZOI2uBskSA` and the first item's to the existing 1.0.0 trailer (D5).
-- [ ] Encode the second clip (clean compression, 30 fps, no grade):
+- [x] Set the second item's link to `https://youtu.be/zZOI2uBskSA` and the first item's to the existing 1.0.0 trailer (D5).
+- [x] Encode the second clip (clean compression, 30 fps, no grade):
   ```bash
   ffmpeg -i "/mnt/e/Repos_Alis/promotion/tmp/resources/world_generation_raw/WorldGeneration.mp4" \
     -vf "scale=720:-2:flags=lanczos,fps=30,format=yuv420p" \
@@ -199,16 +199,16 @@ The `<video>` element already owns playback lifecycle; the simplest design lets 
     assets/media/alis-worldgen-loop.mp4
   ```
   Measured result: 2,493,452 bytes (2.4 MiB). Fallback ladder if the in-motion review shows artefacts on the fast flythroughs or text: (1) full clip, CRF 32 / 720 / 30 fps → 3,051,822 bytes (2.9 MiB); (2) if still unacceptable, shorten the homepage proxy and encode at **CRF 30 or better**, measuring until the exact file length is ≤3,145,728 bytes (measured examples: 45 s at CRF 30 → 2,548,280 bytes; 45 s at CRF 32 → 2,052,365 bytes). Do not return to CRF 34 once it has been rejected: shortening does not fix CRF-34 artefacts. Keep the full-length version on YouTube. Never reduce the frame rate, and do not treat a lower resolution as a quality fix.
-- [ ] Add the plain-blob exemption to `.gitattributes` next to the existing one:
+- [x] Add the plain-blob exemption to `.gitattributes` next to the existing one:
   ```gitattributes
   assets/media/alis-worldgen-loop.mp4 -filter -diff -merge -text
   ```
-- [ ] Restructure `index.html`: add class `alis-trailer-video`, keep `src`/`loop` for the no-JS fallback, and add the sibling `.alis-trailer-dots` group with two `<button type="button" class="alis-trailer-dot" data-clip="0|1" aria-label="...">` elements and `hidden` on the group.
-- [ ] Add `assets/js/alis-trailer.js` per [Decision](#decision): item list with `src`/`href`/`label`; `loop=false`; random start that skips a needless reload; `ended` advance; anchor `href`/`aria-label` sync; dot click; active/`aria-current` sync; unhide dots.
-- [ ] Add dot styles to `_sass/custom/_trailer_custom.scss` using theme variables: `.alis-trailer-dots` `position:absolute; bottom; z-index:3; left:50%; transform:translateX(-50%)`; render only when not `hidden` (`:not([hidden]){display:flex}` or a `[hidden]{display:none}` rule); each button ≥44x44 px with a small `::before` dot; add `transition:none` for the dot under the existing `prefers-reduced-motion` block.
-- [ ] Load the JS in `_includes/head/custom.html` with `defer` and `?v={{ site.time | date: '%s' }}`.
-- [ ] Update root `README.md` per [Documentation plan](#documentation-plan).
-- [ ] Run the verification matrix, including the in-motion CRF review, and review the final diff against this todo.
+- [x] Restructure `index.html`: add class `alis-trailer-video`, keep `src`/`loop` for the no-JS fallback, and add the sibling `.alis-trailer-dots` group with two `<button type="button" class="alis-trailer-dot" data-clip="0|1" aria-label="...">` elements and `hidden` on the group.
+- [x] Add `assets/js/alis-trailer.js` per [Decision](#decision): item list with `src`/`href`/`label`; `loop=false`; random start that skips a needless reload; `ended` advance; anchor `href`/`aria-label` sync; dot click; active/`aria-current` sync; unhide dots.
+- [x] Add dot styles to `_sass/custom/_trailer_custom.scss` using theme variables: `.alis-trailer-dots` `position:absolute; bottom; z-index:3; left:50%; transform:translateX(-50%)`; render only when not `hidden` (`:not([hidden]){display:flex}` or a `[hidden]{display:none}` rule); each button ≥44x44 px with a small `::before` dot; add `transition:none` for the dot under the existing `prefers-reduced-motion` block.
+- [x] Load the JS in `_includes/head/custom.html` with `defer` and `?v={{ site.time | date: '%s' }}`.
+- [x] Update root `README.md` per [Documentation plan](#documentation-plan).
+- [x] Run the machine verification matrix and review the final diff against this todo. The subjective in-motion CRF 34 review is operator-only and remains outstanding (see [Review record](#review-record)).
 
 ## Test-first and verification plan
 
@@ -283,3 +283,15 @@ The `<video>` element already owns playback lifecycle; the simplest design lets 
 - Fix 1 (fallback ladder): step 2 no longer shortens at CRF 34. It now shortens the proxy and encodes at **CRF 30 or better** until the exact length is ≤3,145,728 bytes (measured: 45 s at CRF 30 = 2,548,280 B; 45 s at CRF 32 = 2,052,365 B; 45 s at CRF 28 = 3,203,397 B, over budget). Never reduce fps or resolution; full trailer stays on YouTube.
 - Fix 2 (acceptance test): the ≤3 MiB gate is enforced on exact file length via `stat -c '%s %n'` (≤3,145,728 bytes); `du -h` is informational only. Applied in Evidence, Documentation plan, and Completion criteria.
 - No code changed; implementation still awaits an explicit go.
+
+### 2026-10-06 - Implementation and verification
+
+- **Trigger (operator):** invoked the implementation skill, authorizing the approved plan. Baseline at start: `main` == `origin/main` at `fcd5724`, worktree clean.
+- Changed: `assets/media/alis-worldgen-loop.mp4` (new), `.gitattributes` (exemption), `index.html` (single `<video src>` fallback + dots, `loop` kept for no-JS), `assets/js/alis-trailer.js` (new), `_sass/custom/_trailer_custom.scss` (dot styles), `_includes/head/custom.html` (deferred script), `README.md` (Homepage preview media). No theme files touched. Nothing was staged or committed.
+- Verification run:
+  - Clip: `ffprobe` → h264, 720x406 (SAR 406:405, DAR 16:9), 30 fps, no audio, 68.3 s; `stat -c %s` → 2,493,452 ≤ 3,145,728.
+  - Blob: `git check-attr -a` → `filter: unset`; `file` → MP4 data; no `git lfs ls-files` match.
+  - Build: `bundle exec jekyll build` → done in 20.9 s; `_site` contains the new mp4, the JS, dot rules in `trailer.css`, and `src`+`loop`+dots in `index.html`.
+  - Runtime (headless Chromium via Playwright against `bundle exec jekyll serve --host 127.0.0.1 --port 4011 --force_polling`, script `tmp/verify-trailer.cjs`): 13/13 checks passed — dots revealed; JS set `loop=false`; both clips observed across 12 reloads; the real `ended` event advanced trailer → worldgen; **actionability-checked** dot clicks switched `currentSrc` together with the anchor `href`/`aria-label` and opened no popup; a keyboard activation worked; a real click on the card body opened exactly the active clip's link (`https://youtu.be/zZOI2uBskSA`); the active dot carried `aria-current`; the no-JS context kept `src`+`loop` with dots hidden; zero page/console errors.
+  - Quality proxy (not a substitute for the operator's motion review): SSIM against a CRF 18 reference at the same 720/30 settings → CRF 34 All 0.945, CRF 32 All 0.957; full-resolution frames at 12/36/48/60/66 s keep the text overlays crisp with no grade or blocking.
+- Outstanding, operator-only: the subjective in-motion CRF 34 review required by [Completion criteria](#completion-criteria). If it fails, use the measured CRF 32 / shortened-proxy fallback (`## Implementation tasks`).

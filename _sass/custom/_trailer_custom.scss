@@ -58,6 +58,54 @@
   line-height: 1.45;
 }
 
+.alis-trailer-dots {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 50%;
+  z-index: 3;
+  transform: translateX(-50%);
+}
+
+.alis-trailer-dots:not([hidden]) {
+  display: flex;
+}
+
+.alis-trailer-dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.alis-trailer-dot::before {
+  width: 0.55rem;
+  height: 0.55rem;
+  content: "";
+  background-color: rgba($background-color, 0.55);
+  border: 1px solid rgba($background-color, 0.85);
+  border-radius: 50%;
+  box-shadow: 0 0 0.25rem rgba($text-color, 0.45);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.alis-trailer-dot.is-active::before,
+.alis-trailer-dot:hover::before {
+  background-color: $background-color;
+  transform: scale(1.25);
+}
+
+.alis-trailer-dot:focus-visible {
+  outline: 2px solid $link-color;
+  outline-offset: 2px;
+}
+
 .alis-trailer-card a:hover video,
 .alis-trailer-card a:focus-visible video {
   transform: scale(1.015);
@@ -75,6 +123,15 @@
 
   .alis-trailer-card a:hover video,
   .alis-trailer-card a:focus-visible video {
+    transform: none;
+  }
+
+  .alis-trailer-dot::before {
+    transition: none;
+  }
+
+  .alis-trailer-dot.is-active::before,
+  .alis-trailer-dot:hover::before {
     transform: none;
   }
 }
