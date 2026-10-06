@@ -49,6 +49,10 @@ On the homepage trailer card, show one of two muted loop clips chosen at random 
   - Effect: fixes the second clip's anchor `href`/`aria-label`; closes Q5; resolves A7.
   - Reason: not stated
   - Date/source: 2026-10-06 operator confirmation
+- **D6** Apply the two required review fixes: each clip preserves its own source frame rate (existing 24 fps, new 30 fps; never reduce fps for size), and the quality fallback must satisfy the homepage size budget by shortening the proxy rather than reducing frame rate or resolution. Implementation remains gated on an explicit go.
+  - Effect: fixes the frame-rate rules and the fallback ladder; keeps implementation gated.
+  - Reason: not stated
+  - Date/source: 2026-10-06 operator request (relayed review)
 
 ### Operator gates
 
@@ -61,12 +65,12 @@ On the homepage trailer card, show one of two muted loop clips chosen at random 
 ### Working assumptions
 
 - **A1 [ACTIVE]:** Keep the existing whole-card anchor to YouTube; the dots are sibling `<button>`s overlaid at the card bottom, so a dot click switches the clip without navigating. Each carousel item also carries the anchor `href`/`aria-label` to apply when it becomes active (D5).
-- **A2 [ACTIVE]:** Use the entire ~68.3 s world-generation clip; the clean 30 fps CRF 34 encode is ~2.49 MB, inside the ≤3 MB budget.
+- **A2 [ACTIVE]:** Use the entire ~68.3 s world-generation clip; the clean 30 fps CRF 34 encode is 2.4 MiB, inside the ≤3 MiB budget. If the in-motion review rejects CRF 34, fall through the CRF 32 / shorten ladder (D6) rather than dropping frame rate.
 - **A3 [REJECTED by evidence]:** Apply the trailer's `eq`/`vignette`/`fade` recipe to the world-generation clip - the card CSS already supplies a vignette/gradient overlay, and re-grading a finished master with large spatial text risks readability for no functional gain.
 - **A4 [ACTIVE]:** Hard cut on `ended` (no crossfade). No baked fades; the earlier plan relied on baked fades as the transition and that dependency is removed.
 - **A5 [REJECTED by evidence]:** Without JavaScript the inline preview does not play - the existing `<video src>` is retained as the no-JS/error fallback, so the first clip still plays.
 - **A6 [ACTIVE]:** Keep `loop` in the HTML for the no-JS fallback, and have JS set `video.loop = false` on init so `ended` can fire for the carousel. Without this, no-JS degrades from looping to play-once.
-- **A7 [RESOLVED by D5]:** The world-generation clip's full trailer is `https://youtu.be/zZOI2uBskSA`; pending Q5 confirmation before deploy.
+- **A7 [RESOLVED by D5]:** The world-generation clip's full trailer is `https://youtu.be/zZOI2uBskSA`.
 - **A8 [ACTIVE]:** Carousel data lives in the JS as a plain item list (`src`, `href`, `label`); no generic carousel abstraction and no second `<video>` element.
 
 ## Non-goals
@@ -88,10 +92,13 @@ On the homepage trailer card, show one of two muted loop clips chosen at random 
 - `assets/media/alis-trailer-loop.mp4`: h264, 720x406, 24 fps, 41.167 s, 2,301,411 bytes (~447 kbps), no audio.
 - Raw `WorldGeneration.mp4`: h264 1920x1080 **30 fps** + aac audio, 68.331 s, 134,823,232 bytes (~15.8 Mbps). 30 fps ⇒ ~2050 source frames; forcing 24 fps drops ~410 frames (~20%).
 - Clean encodes of the raw clip (`scale=720:-2:flags=lanczos,fps=30,format=yuv420p`, `-an`, libx264 high/3.1, `-preset slow`, `-movflags +faststart`), no colour grade:
-  - CRF 34 → 2,493,452 bytes (2.49 MB)
-  - CRF 30 → 3,784,898 bytes (3.78 MB)
-  - CRF 28 → 4,746,300 bytes (4.75 MB)
-  - CRF 34 at 640-wide → 2,075,779 bytes (2.08 MB)
+  - CRF 34 → 2,493,452 bytes (2.4 MiB)
+  - CRF 32 → 3,051,822 bytes (2.9 MiB)
+  - CRF 30 → 3,784,898 bytes (3.6 MiB)
+  - CRF 28 → 4,746,300 bytes (4.5 MiB)
+  - CRF 34, first 45 s only → 1,676,451 bytes (1.6 MiB)
+  - CRF 34 at 640-wide → 2,075,779 bytes (2.0 MiB) — measured, not part of the fallback ladder
+- Homepage budget convention (inherited from the prior card): ≤3 MiB as reported by `du -h`, i.e. 3,145,728 bytes. CRF 34 and CRF 32 fit; CRF 30 does not.
 - The earlier graded 24 fps CRF 34 encode was 2,215,801 bytes; ~278 KB (11%) of its saving came from dropping to 24 fps and grading detail away.
 - Raw clip starts and ends on bright, fully saturated frames (frames at 0/12/24/36/48/60/66 s), so it has no existing fade and a baked fade would be new editorial content.
 - `_posts/2026-10-06-n000005-build-the-game.md` ends with `Watch https://youtu.be/zZOI2uBskSA`; `tmp/resources/.../n5_BuildTheGame.webp` and `frame_49_990.png` are frames of `WorldGeneration.mp4`. No other file in the site repo maps this clip to a URL.
@@ -103,7 +110,7 @@ On the homepage trailer card, show one of two muted loop clips chosen at random 
 **Inferences**
 
 - `WorldGeneration.mp4` is the "Build the Game" trailer (n000005), so its YouTube destination is `https://youtu.be/zZOI2uBskSA`. The thumbnail match is strong and the URL is operator-confirmed by D5.
-- The world-generation footage is flat-shaded and low-detail, so CRF 34 at 30 fps stays within budget; the size trade for keeping 30 fps is ~0.28 MB.
+- The world-generation footage is flat-shaded and low-detail, so CRF 34 (2.4 MiB) and the CRF 32 fallback (2.9 MiB) both fit the ≤3 MiB budget at 30 fps; CRF 30 (3.6 MiB) does not. The size trade for keeping 30 fps over 24 fps at CRF 34 is ~0.28 MB.
 
 **Assumptions / unverified areas**
 
@@ -147,7 +154,7 @@ Drive the card from **one** `<video>` element whose `src` is chosen and advanced
   - on `ended`, advance `(i+1) % n`;
   - on every switch, also set the card anchor's `href` and `aria-label` to the active item's, and sync `.is-active` + `aria-current` on the dots;
   - unhide the dots.
-- Encode `assets/media/alis-worldgen-loop.mp4` with **clean compression only** (no `eq`, no `vignette`, no baked `fade`), 30 fps, CRF 34 default, and require an in-motion review before accepting that CRF (see verification plan).
+- Encode `assets/media/alis-worldgen-loop.mp4` with **clean compression only** (no `eq`, no `vignette`, no baked `fade`), at its own source 30 fps, CRF 34 default, and require an in-motion review before accepting that CRF. If rejected, fall to CRF 32 and then to a shorter proxy (D6); never reduce frame rate (see verification plan). The existing 24 fps clip is not re-encoded.
 - Dot styles appended to `_sass/custom/_trailer_custom.scss` using theme variables; ~44x44 px hit area with a small visual dot.
 - Load the JS from `_includes/head/custom.html` with `defer` and the same `?v=` cache-bust used for `trailer.css`.
 - `.gitattributes` gains an exemption so the new MP4 stays a plain Git blob.
@@ -174,10 +181,10 @@ The `<video>` element already owns playback lifecycle; the simplest design lets 
 4. The dots reflect the active clip and switch clips by mouse and keyboard (real `<button>`s, ~44 px hit area).
 5. The card anchor's `href`/`aria-label` always match the currently active clip's destination; dots are never nested inside the anchor.
 6. No theme files are modified; styles use only `_sass/custom/` and theme variables.
-7. Both MP4s are plain Git blobs (no LFS pointers), h264/yuv420p, faststart, no audio, 720-wide, **30 fps**, each ≤3 MB.
-8. No colour grade, vignette, or baked fade is applied to the worlds-generation master.
+7. Both MP4s are plain Git blobs (no LFS pointers), h264/yuv420p, faststart, no audio, 720-wide, each ≤3 MiB (3,145,728 bytes), and each preserves its own source frame rate: the existing clip stays 24 fps and the new clip is 30 fps.
+8. No colour grade, vignette, or baked fade is applied to the world-generation master.
 9. Without JavaScript the first clip still autoplays and loops, and no interactive controls render (dots hidden).
-10. Both clips play at the source frame rate; no frame-rate reduction as a size shortcut.
+10. Never reduce a clip's frame rate for size, and do not treat a lower resolution as a quality fix.
 
 ## Implementation tasks
 
@@ -189,7 +196,7 @@ The `<video>` element already owns playback lifecycle; the simplest design lets 
     -an -c:v libx264 -profile:v high -level 3.1 -crf 34 -preset slow -movflags +faststart \
     assets/media/alis-worldgen-loop.mp4
   ```
-  Measured result: 2,493,452 bytes. If the in-motion review shows artefacts on the fast flythroughs or text, prefer, in order: CRF 30 at 720-wide (3.78 MB), CRF 34 at 640-wide (2.08 MB), or a shorter cut — not a lower frame rate.
+  Measured result: 2,493,452 bytes (2.4 MiB). Fallback ladder if the in-motion review shows artefacts on the fast flythroughs or text: (1) CRF 32 / 720 / 30 fps → 3,051,822 bytes (2.9 MiB); (2) if still unacceptable or over the ≤3 MiB budget, shorten the homepage proxy (measured example: first 45 s at CRF 34 / 720 / 30 fps → 1,676,451 bytes). Keep the full-length version on YouTube. Never reduce the frame rate, and do not treat a lower resolution as a quality fix.
 - [ ] Add the plain-blob exemption to `.gitattributes` next to the existing one:
   ```gitattributes
   assets/media/alis-worldgen-loop.mp4 -filter -diff -merge -text
@@ -212,7 +219,7 @@ The `<video>` element already owns playback lifecycle; the simplest design lets 
 
 ### Green evidence
 
-- Clip facts: `du -h assets/media/alis-trailer-loop.mp4 assets/media/alis-worldgen-loop.mp4` (each ≤3 MB) and `ffprobe -hide_banner -v error -show_entries stream=codec_name,width,height,r_frame_rate -show_entries format=duration -of default=noprint_wrappers=1 <file>` (h264, 720-wide, **30 fps**, no audio).
+- Clip facts: `du -h assets/media/alis-trailer-loop.mp4 assets/media/alis-worldgen-loop.mp4` (each ≤3 MiB) and `ffprobe -hide_banner -v error -show_entries stream=codec_name,width,height,r_frame_rate -show_entries format=duration -of default=noprint_wrappers=1 <file>` (h264, 720-wide, no audio; existing clip 24 fps, new clip 30 fps).
 - Blob policy: `git check-attr -a -- assets/media/alis-worldgen-loop.mp4` shows no `filter: lfs`; `file assets/media/alis-worldgen-loop.mp4` reports MP4 data.
 - Build: `bundle exec jekyll build` succeeds; `_site/index.html` keeps `src`+`loop` on the video and contains the dots; `_site/assets/media/alis-worldgen-loop.mp4`, `_site/assets/js/alis-trailer.js`, and dot rules in `_site/assets/css/trailer.css` exist.
 - Runtime smoke (WSL2 polling per project rules): `bundle exec jekyll serve --host 0.0.0.0 --force_polling`, open `/`, reload several times for the random start, drive `ended` to confirm advance + wrap, confirm the card `href` follows the active clip, click and keyboard-tab the dots, check a narrow mobile width, emulate `prefers-reduced-motion`, and disable JavaScript to confirm the first clip still autoplays and loops with no dots.
@@ -222,7 +229,7 @@ The `<video>` element already owns playback lifecycle; the simplest design lets 
 
 - **Authoritative stable owner:** root `README.md` — add a short "Homepage preview media" section.
 - **Router / TOC update:** none (no docs router exists; `/docs` is not a convention here).
-- **Content to add:** the two clip files and their roles; the shared encode recipe with the "compression only, no grade, keep source frame rate" rule; the ≤3 MB budget; 30 fps / 720-wide / no audio / faststart; the `.gitattributes` plain-blob requirement; the destination the card link uses for each clip.
+- **Content to add:** the two clip files and their roles; the shared encode recipe with the "compression only, no grade, keep source frame rate" rule; the ≤3 MiB budget; 720-wide / no audio / faststart; each clip keeps its source frame rate (existing 24 fps, new 30 fps); the `.gitattributes` plain-blob requirement; the destination the card link uses for each clip.
 - **Duplication avoided:** `index.html` and `alis-trailer.js` own the runtime contract; README names the files but does not restate the markup or JS. The completed `todo/done/homepage-trailer-proxy-card.md` is a historical record and is left untouched.
 
 ## Rollout and rollback
@@ -233,7 +240,7 @@ The `<video>` element already owns playback lifecycle; the simplest design lets 
 
 ## Completion criteria
 
-`PASS` requires: both MP4s present, ≤3 MB, h264/**30 fps**/720-wide/no-audio; no grade or baked fade in the new clip; `alis-worldgen-loop.mp4` not LFS-tracked; `bundle exec jekyll build` clean with the expected `_site` outputs; runtime evidence of random start, `ended` advance + wrap, dot switching (mouse + keyboard), card `href` following the active clip, and the no-JS fallback still autoplaying and looping; an in-motion CRF review recorded; no theme files modified; README section added; no unrelated changes.
+`PASS` requires: both MP4s present, ≤3 MiB, h264/720-wide/no-audio with the existing clip at 24 fps and the new clip at 30 fps; no grade or baked fade in the new clip; `alis-worldgen-loop.mp4` not LFS-tracked; `bundle exec jekyll build` clean with the expected `_site` outputs; runtime evidence of random start, `ended` advance + wrap, dot switching (mouse + keyboard), card `href` following the active clip, and the no-JS fallback still autoplaying and looping; an in-motion CRF review recorded; no theme files modified; README section added; no unrelated changes.
 
 ## Review record
 
@@ -248,7 +255,7 @@ The `<video>` element already owns playback lifecycle; the simplest design lets 
 - **Trigger (operator):** "Critically evaluate the reviewer's feedback against the actual code, system architecture, and our project goals ... Update the code/docs ... If any reviewer points are incorrect, explicitly highlight and refute them."
 - Reviewer verdict was `PATCH`: core architecture (one `<video>` + small vanilla JS, random first item, `ended` → next, two dots, no carousel dependency) accepted.
 - D4 added; Q1 and Q3 closed by D4; A3 and A5 marked `REJECTED by evidence`; A6, A7, A8 added; Q5 opened as blocking.
-- Adopted findings (evidence attached in [Verified evidence](#verified-evidence)): per-clip `href`/`aria-label`; preserve 30 fps (24 fps drops ~410 frames for ~0.28 MB); no destructive re-grade/fades (card CSS already overlays); keep the `src` fallback and, beyond the review, keep `loop` in HTML with `loop=false` set by JS so the no-JS fallback still loops; ~44 px dot hit area.
+- Adopted findings (evidence attached in [Verified evidence](#verified-evidence)): per-clip `href`/`aria-label`; preserve the new clip's 30 fps (24 fps drops ~410 frames for ~0.28 MB); no destructive re-grade/fades (card CSS already overlays); keep the `src` fallback and, beyond the review, keep `loop` in HTML with `loop=false` set by JS so the no-JS fallback still loops; ~44 px dot hit area.
 - Refuted/qualified findings: the review asserted the existing single link was wrong while supplying a placeholder URL it did not have; the destination is not operator-confirmed and is gated as Q5 with the evidence-backed candidate. The review also did not note that keeping `loop` in HTML (not merely `src`) is what preserves the pre-existing looping fallback.
 - Baseline moved during this round: `main` was fast-forwarded to `origin/main` and this todo was committed as `61ea270`, whose message claims an implementation the diff does not contain. No carousel source exists yet; the reviewer's stale-baseline gate is satisfied.
 
@@ -257,3 +264,12 @@ The `<video>` element already owns playback lifecycle; the simplest design lets 
 - **Trigger (operator):** "wait my explicit go, about clip link yes"
 - D5 added; Q5 closed by D5; A7 resolved by D5.
 - Interpretation: the operator confirmed the world-generation clip's destination as the evidence-backed `https://youtu.be/zZOI2uBskSA`, and explicitly withheld implementation authorization pending an explicit go. No code was changed in this round.
+
+### 2026-10-06 - Second review round (PATCH) and revision
+
+- **Trigger (operator):** relayed review: "Frame-rate acceptance is impossible as written ... quality fallback conflicts with its own ≤3 MB gate ... remove stale A7 wording ... Wait for explicit implementation go."
+- D6 added. Both required fixes accepted; no reviewer point refuted in this round.
+- Fix 1 (frame rate): the contradictory "both MP4s 30 fps" requirements are removed. Invariants 7/10, Green evidence, Documentation plan, and Completion criteria now require each clip to preserve its own source frame rate (existing 24 fps, new 30 fps) and never reduce fps for size; the existing clip is not re-encoded.
+- Fix 2 (budget vs fallback): CRF 30 / 720 (3.6 MiB) is dropped as a fallback because it exceeds the budget. Measured ladder is CRF 34 / 720 / 30 fps (2.4 MiB) → CRF 32 / 720 / 30 fps (2.9 MiB) → shorten the proxy (45 s at CRF 34 = 1.6 MiB), with the full trailer staying on YouTube. The gate is stated explicitly as ≤3 MiB (`du -h`, 3,145,728 bytes), matching the prior card's convention.
+- Cleanup: A7's stale "pending Q5 confirmation before deploy" clause removed; A7 remains `[RESOLVED by D5]`.
+- No code changed; implementation still awaits an explicit go.
