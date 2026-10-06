@@ -295,3 +295,10 @@ The `<video>` element already owns playback lifecycle; the simplest design lets 
   - Runtime (headless Chromium via Playwright against `bundle exec jekyll serve --host 127.0.0.1 --port 4011 --force_polling`, script `tmp/verify-trailer.cjs`): 13/13 checks passed — dots revealed; JS set `loop=false`; both clips observed across 12 reloads; the real `ended` event advanced trailer → worldgen; **actionability-checked** dot clicks switched `currentSrc` together with the anchor `href`/`aria-label` and opened no popup; a keyboard activation worked; a real click on the card body opened exactly the active clip's link (`https://youtu.be/zZOI2uBskSA`); the active dot carried `aria-current`; the no-JS context kept `src`+`loop` with dots hidden; zero page/console errors.
   - Quality proxy (not a substitute for the operator's motion review): SSIM against a CRF 18 reference at the same 720/30 settings → CRF 34 All 0.945, CRF 32 All 0.957; full-resolution frames at 12/36/48/60/66 s keep the text overlays crisp with no grade or blocking.
 - Outstanding, operator-only: the subjective in-motion CRF 34 review required by [Completion criteria](#completion-criteria). If it fails, use the measured CRF 32 / shortened-proxy fallback (`## Implementation tasks`).
+
+### 2026-10-06 - Review nit applied
+
+- **Trigger (operator):** relayed review nit that the README's "Encoding rules for either clip" mis-scoped the compression-only rule.
+- Evidence: `todo/done/homepage-trailer-proxy-card.md` records the first clip's recipe as `fps=24,eq=brightness=-0.04:contrast=1.08:saturation=0.92,vignette=PI/5,fade=t=in:st=0:d=0.5,fade=t=out:st=40.3:d=0.8` at CRF 34, so the no-grade/no-fade rule applies only to new or re-encoded previews.
+- README rescoped to "new or re-encoded previews" and now states the existing first clip is retained unchanged. No code changed; `README` is excluded from the Jekyll build, so no rebuild was needed.
+- Still outstanding: the operator-only normal-speed review of `assets/media/alis-worldgen-loop.mp4`; the todo is not moved to `todo/done/` until that gate passes.
