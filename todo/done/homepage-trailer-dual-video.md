@@ -1,6 +1,6 @@
 # Homepage dual-video trailer carousel
 
-**Status:** IMPLEMENTED — machine verification PASS; one operator-only item outstanding (in-motion CRF 34 review)
+**Status:** DONE
 **Scope:** Homepage trailer card (`index.html`), custom Sass, custom head include, new homepage JS, `assets/media`, `.gitattributes`
 **Stable documentation owner:** root `README.md` (proposed short "Homepage preview media" section). No existing stable doc owns the served preview clips; the recipe currently lives only in the completed `todo/done/homepage-trailer-proxy-card.md`.
 
@@ -53,6 +53,10 @@ On the homepage trailer card, show one of two muted loop clips chosen at random 
   - Effect: fixes the frame-rate rules and the fallback ladder; keeps implementation gated.
   - Reason: not stated
   - Date/source: 2026-10-06 operator request (relayed review)
+- **D7** The compressed world-generation preview is visually good at normal speed; the in-motion CRF 34 quality gate passes.
+  - Effect: closes the last outstanding completion item; the 2,493,452-byte CRF 34 encode is accepted and no re-encode is needed.
+  - Reason: "compressed video is good"
+  - Date/source: 2026-10-06 operator confirmation
 
 ### Operator gates
 
@@ -208,7 +212,7 @@ The `<video>` element already owns playback lifecycle; the simplest design lets 
 - [x] Add dot styles to `_sass/custom/_trailer_custom.scss` using theme variables: `.alis-trailer-dots` `position:absolute; bottom; z-index:3; left:50%; transform:translateX(-50%)`; render only when not `hidden` (`:not([hidden]){display:flex}` or a `[hidden]{display:none}` rule); each button ≥44x44 px with a small `::before` dot; add `transition:none` for the dot under the existing `prefers-reduced-motion` block.
 - [x] Load the JS in `_includes/head/custom.html` with `defer` and `?v={{ site.time | date: '%s' }}`.
 - [x] Update root `README.md` per [Documentation plan](#documentation-plan).
-- [x] Run the machine verification matrix and review the final diff against this todo. The subjective in-motion CRF 34 review is operator-only and remains outstanding (see [Review record](#review-record)).
+- [x] Run the machine verification matrix and review the final diff against this todo. The operator confirmed the in-motion CRF 34 review (D7).
 
 ## Test-first and verification plan
 
@@ -302,3 +306,9 @@ The `<video>` element already owns playback lifecycle; the simplest design lets 
 - Evidence: `todo/done/homepage-trailer-proxy-card.md` records the first clip's recipe as `fps=24,eq=brightness=-0.04:contrast=1.08:saturation=0.92,vignette=PI/5,fade=t=in:st=0:d=0.5,fade=t=out:st=40.3:d=0.8` at CRF 34, so the no-grade/no-fade rule applies only to new or re-encoded previews.
 - README rescoped to "new or re-encoded previews" and now states the existing first clip is retained unchanged. No code changed; `README` is excluded from the Jekyll build, so no rebuild was needed.
 - Still outstanding: the operator-only normal-speed review of `assets/media/alis-worldgen-loop.mp4`; the todo is not moved to `todo/done/` until that gate passes.
+
+### 2026-10-06 - Operator motion-quality confirmation
+
+- **Trigger (operator):** "compressed video is good".
+- D7 recorded: the in-motion quality gate for the CRF 34 world-generation encode passes. No re-encode needed; the 2,493,452-byte clip ships as-is and no fallback (CRF 32 / shortened proxy) is used.
+- The last outstanding completion item is closed, so this todo moves to `todo/done/`.
