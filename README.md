@@ -36,3 +36,33 @@ ffmpeg -i WorldGeneration.mp4 \
   -an -c:v libx264 -profile:v high -level 3.1 -crf 34 -preset slow -movflags +faststart \
   assets/media/alis-worldgen-loop.mp4
 ```
+
+## GitHub README previews
+
+The ALIS repository README shows the same two clips as animated images, because
+GitHub removes `<video>` from rendered Markdown. `assets/media/` holds one AVIF
+image sequence per loop, generated from that loop and never edited by hand:
+
+- `alis-trailer-loop.avif` — from `alis-trailer-loop.mp4`.
+- `alis-worldgen-loop.avif` — from `alis-worldgen-loop.mp4`.
+
+Regenerate a file whenever its loop changes:
+
+- `libsvtav1`, yuv420p, no audio, infinite loop, 480 px wide, `-preset 4`.
+- The whole clip at the source frame rate. The trailer skips its first 0.5 s so
+  the image does not open on a black frame.
+- Exact file length must be ≤3,145,728 bytes; raise `-crf` to shrink a file.
+  GitHub's image proxy rejects images above roughly 5 MB.
+- `*.avif` stays a plain Git blob in `.gitattributes`, as GitHub Pages requires.
+
+```bash
+ffmpeg -ss 0.5 -i assets/media/alis-trailer-loop.mp4 \
+  -vf "scale=480:-2:flags=lanczos" \
+  -an -c:v libsvtav1 -crf 36 -preset 4 -pix_fmt yuv420p -loop 0 \
+  assets/media/alis-trailer-loop.avif
+
+ffmpeg -i assets/media/alis-worldgen-loop.mp4 \
+  -vf "scale=480:-2:flags=lanczos" \
+  -an -c:v libsvtav1 -crf 40 -preset 4 -pix_fmt yuv420p -loop 0 \
+  assets/media/alis-worldgen-loop.avif
+```
