@@ -132,9 +132,15 @@ author:
 # Site Footer
 footer:
   links:
+    - label: "ALIS site"
+      icon: "fas fa-fw fa-home"
+      url: "https://fall.is/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/fallintodusk"
+      url: "https://github.com/fallintodusk/alis"
+    - label: "YouTube"
+      icon: "fab fa-fw fa-youtube"
+      url: "https://www.youtube.com/@fallintodusk"
     - label: "Discord"
       icon: "fab fa-fw fa-discord"
       url: "https://discord.gg/rj56ThURtT"
